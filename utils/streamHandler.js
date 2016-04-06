@@ -12,6 +12,9 @@ module.exports = function(stream, io) {
       date: data.created_at,
       screenname: data.user.screen_name
     };
-    console.log(tweet);
+
+    io.emit('tweet', tweet);
+    // console.log(tweet);
+
   });
 };
