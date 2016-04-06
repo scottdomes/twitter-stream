@@ -13,8 +13,11 @@ module.exports = function(stream, io) {
       screenname: data.user.screen_name
     };
 
-    io.emit('tweet', tweet);
-    // console.log(tweet);
+    // Timer function
+    // if (Date.now() % 100 === 0) { 
+      io.emit('tweet', tweet);
+      // console.log(tweet);
+    // }
 
   });
 };
