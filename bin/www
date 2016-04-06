@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('twitter-stream:server');
 var http = require('http');
+var twitter = require('ntwitter');
+var streamHandler = require('../utils/streamHandler');
+
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +23,18 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+var io = require('socket.io')(server);
+
+var twit = new twitter({
+  consumer_key: '70iyopLmD3E9nhUr45JqFFZEJ',
+  consumer_secret: '1D5qSUWHKjhlnEkgwFGlVoWXRDC6HCC9RLD3FNenKHHoX25IYO',
+  access_token_key: '3540762794-zCX4XNm75rgKSdH0sqXa16vLuSs2Zo35BFTFgz9',
+  access_token_secret: 'G2ZmdYVdoGh7H8fU2E16BKESviTea3soVxcCtqAQ2TWej'
+});
+
+twit.stream('statuses/filter', { track: ['love'] }, function(stream) {
+  streamHandler(stream, io);
+});
 
 /**
  * Listen on provided port, on all network interfaces.

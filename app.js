@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var twitter = require('ntwitter');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -26,19 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-var twit = new twitter({
-  consumer_key: '70iyopLmD3E9nhUr45JqFFZEJ',
-  consumer_secret: '1D5qSUWHKjhlnEkgwFGlVoWXRDC6HCC9RLD3FNenKHHoX25IYO',
-  access_token_key: '3540762794-zCX4XNm75rgKSdH0sqXa16vLuSs2Zo35BFTFgz9',
-  access_token_secret: 'G2ZmdYVdoGh7H8fU2E16BKESviTea3soVxcCtqAQ2TWej'
-});
-
-twit.stream('statuses/filter', { track: ['love'] }, function(stream) {
-
-  stream.on('data', function(data) {
-    console.log(data);
-  });
-});
+mongoose.connect('mongodb://localhost/livetweets');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
