@@ -7,7 +7,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-h1 {
+h1, h3 {
   margin: 0;
 }
 
@@ -25,9 +25,18 @@ a {
     line-height: $NAVBAR_HEIGHT;
   }
 
+  h3 {
+    display: inline-block;
+  }
+
+  h3:last-of-type {
+    margin-right: 40px;
+  }
+
   button {
     background-image: none;
     background-color: white;
+    box-sizing: border-box;
     margin: ($NAVBAR_HEIGHT / 4) 5px;
     height: ($NAVBAR_HEIGHT /2);
   }
