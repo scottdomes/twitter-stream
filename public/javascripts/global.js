@@ -53,7 +53,22 @@ $(function() {
 
   function postTweet() {
     if (tweetsArray.length > 0) {
-      tweetHTML = "<p>" + tweetsArray.shift().body + "</p>";
+      var theTweet = tweetsArray.shift();
+      tweetHTML = 
+        "<div class=\"well tweet\">" + 
+          "<img src=\"" +
+            theTweet.avatar +
+          "\"></img>" +
+          "<h4>" +
+            theTweet.author +
+          "</h4>" +
+          "<h5>@" +
+            theTweet.screenname +
+          "</h5>" +
+          "<p>" +
+            theTweet.body + 
+          "</p>" +
+        "</div>";
       $('#tweets').prepend(tweetHTML);
     }
   }

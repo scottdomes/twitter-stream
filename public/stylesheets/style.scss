@@ -46,3 +46,24 @@ a {
   }
 
 }
+
+#tweets {
+  .tweet {
+    margin: 2px;
+    background-image: none;
+    background-color: white;
+    max-width: 800px;
+    margin: 0 auto;
+
+    img {
+      height: 100%;
+      padding: 10px;
+      float: left;
+    }
+
+    h4, h5 {
+      display: inline-block;
+    }
+
+  }
+}
