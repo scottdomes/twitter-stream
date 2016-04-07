@@ -25,12 +25,16 @@ a {
     line-height: $NAVBAR_HEIGHT;
   }
 
-  h3 {
+  h3, #realtime, #tweet-counter {
     display: inline-block;
   }
 
   h3:last-of-type {
     margin-right: 40px;
+  }
+
+  h3#realtime {
+    display: none;
   }
 
   button {
