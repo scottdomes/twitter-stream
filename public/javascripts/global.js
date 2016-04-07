@@ -62,9 +62,11 @@ $(function() {
           "<h4>" +
             theTweet.author +
           "</h4>" +
-          "<h5>@" +
+          "<h5> <a href=\"http://twitter.com/" +
             theTweet.screenname +
-          "</h5>" +
+          "\">@" +
+            theTweet.screenname +
+          "</a></h5>" +
           "<p>" +
             theTweet.body + 
           "</p>" +
