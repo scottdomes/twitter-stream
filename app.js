@@ -1,15 +1,26 @@
+// Setup
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-
+var http = require('http');
+var config = require('./config');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
 var app = express();
+
+// Added libaries
+var mongoose = require('mongoose');
+var twitter = require('ntwitter');
+var streamHandler = require('./utils/streamHandler');
+var debug = require('debug')('twitter-stream:server');
+var socket_io = require('socket.io');
+var twit = new twitter(config.twitter);
+var io = socket_io();
+app.io = io;
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -57,6 +68,11 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
+});
+
+
+twit.stream('statuses/filter', { track: ['love'] }, function(stream) {
+  streamHandler(stream, io);
 });
 
 
