@@ -59,6 +59,7 @@ $(function() {
 
   function newKeyword(key) {
     tweetsArray = [];
+    console.log(tweetsArray);
     socket.emit('new-keyword', { keyword: key });
   }
 

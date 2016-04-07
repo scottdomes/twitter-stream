@@ -2,10 +2,12 @@ var Tweet = require('../models/Tweet');
 
 module.exports = function(io, twit) {
   var keyword = 'love';
+  var twitterStream; 
 
-  function startStream(keyword) {
-    twit.stream('statuses/filter', { track: [keyword] }, function(stream) {
-      stream.on('data', function(data) {
+  function defineStream(keyword, socket) {
+    twit.stream('statuses/filter', { track: [keyword] }, function(stream) { 
+      twitterStream = stream;
+      twitterStream.on('data', function(data) {
 
         var tweet = {
           twid: data.id,
@@ -16,31 +18,27 @@ module.exports = function(io, twit) {
           date: data.created_at,
           screenname: data.user.screen_name
         };
-
-        var tweetEntry = new Tweet(tweet);
-
-        // tweetEntry.save(function(err) {
-        //   if (!err) {
-            io.emit('tweet', tweet);
-        //   }
-        // });
-
-        // Timer function
-        // if (Date.now() % 100 === 0) {
-          // console.log(tweet);
-        // }
+        socket.emit('tweet', tweet);
 
       });
     });
   }
 
-  io.on('connection', function(socket) {
-    socket.on('new-keyword', function(keyword) {
-      twit.stream.disconnect();
-      startStream(keyword);
+  function startStream() {
+    io.on('connection', function(socket) {
+      defineStream(keyword, socket);
+
+      socket.on('new-keyword', function(newKeyword) {
+          twitterStream.destroy();
+          restartStream(newKeyword.keyword, socket);
+        });
     });
-  });
-  
-  startStream(keyword);
+  }
+
+  function restartStream(keyword, socket) {
+    defineStream(keyword, socket);
+  }
+
+  startStream();
 
 };
