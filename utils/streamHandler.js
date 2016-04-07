@@ -13,9 +13,16 @@ module.exports = function(stream, io) {
       screenname: data.user.screen_name
     };
 
+    var tweetEntry = new Tweet(tweet);
+
+    // tweetEntry.save(function(err) {
+    //   if (!err) {
+        io.emit('tweet', tweet);
+    //   }
+    // });
+
     // Timer function
-    // if (Date.now() % 100 === 0) { 
-      io.emit('tweet', tweet);
+    // if (Date.now() % 100 === 0) {
       // console.log(tweet);
     // }
 

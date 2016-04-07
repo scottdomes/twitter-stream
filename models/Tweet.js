@@ -14,9 +14,9 @@ var schema = new mongoose.Schema({
 schema.statics.getTweets = function(page, skip, callback) {
 
   var tweets = [];
-  // var start = (page * 10) + (skip * 1);
+  var start = (page * 10) + (skip * 1);
 
-  Tweet.find({}, 'twid active author avatar body data screenname').sort({date: 'desc'}).exec(function(err, docs) {
+  Tweet.find({}, 'twid active author avatar body data screenname', {skip: start, limit: 10}).sort({date: 'desc'}).exec(function(err, docs) {
 
     if (!err) {
       tweets = docs;
@@ -25,7 +25,8 @@ schema.statics.getTweets = function(page, skip, callback) {
       });
     }
 
-    callback(tweets); // Pass them to callback
+    // callback(tweets); // Pass them to callback
+    return tweets;
   });
 
 };
