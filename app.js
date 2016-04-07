@@ -71,9 +71,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-twit.stream('statuses/filter', { track: ['love'] }, function(stream) {
-  streamHandler(stream, io);
-});
-
+streamHandler(io, twit);
 
 module.exports = app;

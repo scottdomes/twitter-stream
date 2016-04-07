@@ -25,7 +25,7 @@ a {
     line-height: $NAVBAR_HEIGHT;
   }
 
-  h3, #realtime, #tweet-counter {
+  h3, #realtime, #tweet-counter, form {
     display: inline-block;
   }
 
@@ -37,12 +37,24 @@ a {
     display: none;
   }
 
+  h3#current-keyword {
+    margin-left: 10px;
+  }
+
+  form {
+    margin-left: 20px;
+    color: black;
+  }
+
+  button, input {
+    margin: ($NAVBAR_HEIGHT / 4) 5px;
+    height: ($NAVBAR_HEIGHT /2);
+  }
+
   button {
     background-image: none;
     background-color: white;
     box-sizing: border-box;
-    margin: ($NAVBAR_HEIGHT / 4) 5px;
-    height: ($NAVBAR_HEIGHT /2);
   }
 
 }

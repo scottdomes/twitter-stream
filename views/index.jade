@@ -5,6 +5,14 @@ block content
     .container-fluid
       .navbar-header
         h1= "Tweet Stream"
+      .navbar-left
+        form#form-set-keyword
+          input(
+            type='text'
+            name='keyword'
+            placeholder='Keyword or hashtag'
+          )
+        h3#current-keyword 'love'
 
       .navbar-right
         #tweet-counter

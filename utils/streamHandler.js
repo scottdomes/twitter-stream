@@ -1,30 +1,35 @@
 var Tweet = require('../models/Tweet');
 
-module.exports = function(stream, io) {
-  stream.on('data', function(data) {
+module.exports = function(io, twit) {
+  var keyword = 'love';
 
-    var tweet = {
-      twid: data.id,
-      active: false,
-      author: data.user.name,
-      avatar: data.user.profile_image_url,
-      body: data.text,
-      date: data.created_at,
-      screenname: data.user.screen_name
-    };
+  twit.stream('statuses/filter', { track: [keyword] }, function(stream) {
+    stream.on('data', function(data) {
 
-    var tweetEntry = new Tweet(tweet);
+      var tweet = {
+        twid: data.id,
+        active: false,
+        author: data.user.name,
+        avatar: data.user.profile_image_url,
+        body: data.text,
+        date: data.created_at,
+        screenname: data.user.screen_name
+      };
 
-    // tweetEntry.save(function(err) {
-    //   if (!err) {
-        io.emit('tweet', tweet);
-    //   }
-    // });
+      var tweetEntry = new Tweet(tweet);
 
-    // Timer function
-    // if (Date.now() % 100 === 0) {
-      // console.log(tweet);
-    // }
+      // tweetEntry.save(function(err) {
+      //   if (!err) {
+          io.emit('tweet', tweet);
+      //   }
+      // });
 
+      // Timer function
+      // if (Date.now() % 100 === 0) {
+        // console.log(tweet);
+      // }
+
+    });
   });
+
 };
