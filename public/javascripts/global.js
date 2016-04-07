@@ -1,8 +1,10 @@
 $(function() {
 
-  var socket = io.connect('http://localhost:3000');
+  var url = 'http://localhost:3000';
+  var socket = io.connect(url);
   var tweetsArray = [];
   var delay = 2000;
+  var paused = false;
 
   $('#faster').on('click', function() {
     if (delay > 4000) {
@@ -19,15 +21,33 @@ $(function() {
     console.log(delay);
   });
 
+  $('#pause').on('click', function() {
+    if ($(this).hasClass('playing')) {
+      paused = true;
+      tweetsArray = [];
+      $(this).addClass('paused');
+      $(this).removeClass('playing'); 
+      $(this).text("Resume");
+    } else {
+      paused = false;
+      $(this).addClass('playing');
+      $(this).removeClass('paused'); 
+      $(this).text("Pause");   
+    }
+  });
+
   socket.on('tweet', function(tweet) {
-      tweetsArray.unshift(tweet);
+      if (!paused) {
+        tweetsArray.unshift(tweet);
+      }
   });
 
   var timeout = function() {
-    setTimeout(function() {
-      tweetHTML = "<p>" + tweetsArray.shift().body + "</p>";
-      $('#tweets').prepend(tweetHTML);
-      timeout();
+    setInterval(function() {
+      if (tweetsArray.length > 0) {
+        tweetHTML = "<p>" + tweetsArray.shift().body + "</p>";
+        $('#tweets').prepend(tweetHTML);
+      }
     }, delay);
   };
 
