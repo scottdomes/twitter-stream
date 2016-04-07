@@ -45,11 +45,22 @@ $(function() {
     }
   });
 
+  $('#form-set-keyword').on('submit', function(e) {
+    e.preventDefault();
+    var keyword = $(this).children('input').val();
+    newKeyword(keyword);
+  });
+
   socket.on('tweet', function(tweet) {
       if (!paused) {
         tweetsArray.unshift(tweet);
       }
   });
+
+  function newKeyword(key) {
+    tweetsArray = [];
+    socket.emit('new-keyword', { keyword: key });
+  }
 
   function postTweet() {
     if (tweetsArray.length > 0) {
