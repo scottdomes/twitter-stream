@@ -1,10 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  button#faster Faster
-  button#slower Slower
-  button#pause.playing Pause
+  nav.navbar.navbar-default.navbar-fixed-top
+    .container-fluid
+      .navbar-header
+        h1= "Tweet Stream"
+
+      .navbar-right
+        button#faster.btn.btn-default Faster
+        button#slower.btn.btn-default Slower
+        button#pause.playing.btn.btn-default Pause
+
   #tweets
 

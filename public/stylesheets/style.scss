@@ -1,0 +1,35 @@
+$PRIMARY_COLOR: #429fdd;
+$NAVBAR_HEIGHT: 70px;
+
+body {
+  padding: 50px;
+  padding-top: $NAVBAR_HEIGHT;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  margin: 0;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.navbar {
+  color: white;
+  background-image: none;
+  background-color: $PRIMARY_COLOR;
+  padding: 0 50px;
+
+  h1 {
+    line-height: $NAVBAR_HEIGHT;
+  }
+
+  button {
+    background-image: none;
+    background-color: white;
+    margin: ($NAVBAR_HEIGHT / 4) 5px;
+    height: ($NAVBAR_HEIGHT /2);
+  }
+
+}

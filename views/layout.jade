@@ -2,9 +2,12 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-theme.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     block content
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+    script(src='/javascripts/bootstrap.js')
     script(src="/socket.io/socket.io.js")
     script(src="/javascripts/global.js")

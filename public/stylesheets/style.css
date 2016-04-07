@@ -1,8 +1,2 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
+body{padding:50px;padding-top:70px;font:14px "Lucida Grande", Helvetica, Arial, sans-serif}h1{margin:0}a{color:#00B7FF}.navbar{color:white;background-image:none;background-color:#429fdd;padding:0 50px}.navbar h1{line-height:70px}.navbar button{background-image:none;background-color:white;margin:17.5px 5px;height:35px}
+/*# sourceMappingURL=style.css.map */
