@@ -21,6 +21,10 @@ module.exports = function(io, twit) {
         socket.emit('tweet', tweet);
 
       });
+
+      twitterStream.on('error', function(error, code) {
+          console.log("My error: " + error + ": " + code);
+      });
     });
   }
 
