@@ -61,13 +61,21 @@ $(function() {
 
   function newKeyword(key) {
     tweetsArray = [];
+    $('#tweetFlash').text("Waiting for tweets.");
+    $('#tweetFlash').hide();
     $('#current-keyword').text(key);
     socket.emit('new-keyword', { keyword: key });
   }
 
   function postTweet() {
+    var flash = $('#tweetFlash');
+
     if (tweetsArray.length > 0) {
+      console.log("Tweet has length");
       var theTweet = tweetsArray.shift();
+
+      flash.hide();
+
       tweetHTML = 
         "<div class=\"well tweet\">" + 
           "<img src=\"" +
@@ -86,6 +94,8 @@ $(function() {
           "</p>" +
         "</div>";
       $('#tweets').prepend(tweetHTML);
+    } else {
+      flash.show();
     }
   }
 

@@ -60,26 +60,24 @@ a {
 
 }
 
-#tweets {
-  .tweet {
-    margin: 2px;
-    background-image: none;
-    background-color: white;
-    max-width: 800px;
-    margin: 0 auto;
+.tweet {
+  margin: 2px;
+  background-image: none;
+  background-color: white;
+  max-width: 800px;
+  margin: 0 auto;
 
-    img {
-      height: 100%;
-      padding: 10px;
-      float: left;
-      box-sizing: border-box;
-      min-width: 68px;
-      min-height: 68px;
-    }
-
-    h4, h5 {
-      display: inline-block;
-    }
-
+  img {
+    height: 100%;
+    padding: 10px;
+    float: left;
+    box-sizing: border-box;
+    min-width: 68px;
+    min-height: 68px;
   }
+
+  h4, h5 {
+    display: inline-block;
+  }
+
 }
