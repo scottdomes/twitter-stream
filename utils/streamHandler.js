@@ -28,21 +28,19 @@ module.exports = function(io, twit) {
     });
   }
 
-  function startStream() {
+  function connectSocket() {
     io.on('connection', function(socket) {
-      defineStream(keyword, socket);
 
       socket.on('new-keyword', function(newKeyword) {
-          twitterStream.destroy();
-          restartStream(newKeyword.keyword, socket);
+          // twitterStream.destroy(); Deprecated to prevent too many
+          if (twitterStream === undefined) {
+            defineStream(newKeyword.keyword, socket);
+          }
         });
+
     });
   }
 
-  function restartStream(keyword, socket) {
-    defineStream(keyword, socket);
-  }
-
-  startStream();
+  connectSocket();
 
 };

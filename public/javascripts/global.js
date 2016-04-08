@@ -49,6 +49,8 @@ $(function() {
     e.preventDefault();
     var keyword = $(this).children('input').val();
     newKeyword(keyword);
+    $('#current-keyword').show();
+    $(this).hide();
   });
 
   socket.on('tweet', function(tweet) {

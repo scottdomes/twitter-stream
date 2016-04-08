@@ -21,7 +21,7 @@ a {
   background-color: $PRIMARY_COLOR;
   padding: 0 50px;
 
-  h1 {
+  h1, #current-keyword {
     line-height: $NAVBAR_HEIGHT;
   }
 
@@ -38,7 +38,8 @@ a {
   }
 
   h3#current-keyword {
-    margin-left: 10px;
+    display: none;
+    margin-left: 30px;
   }
 
   form {
