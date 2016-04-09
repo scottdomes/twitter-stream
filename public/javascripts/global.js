@@ -99,9 +99,30 @@ $(function() {
     }
   }
 
+  function animateIcon() {
+    var icon = $('.navbar .glyphicon');
+    icon.css({
+      'webkit-animation': 'spin ' + (tweetDelay / 2000) + 's 1 linear',
+      '-moz-animation': 'spin ' + (tweetDelay / 2000) + 's 1 linear',
+      '-o-animation': 'spin ' + (tweetDelay / 2000) + 's 1 linear',
+      'animation': 'spin ' + (tweetDelay / 2000) + 's 1 linear'
+      });
+    setTimeout(function() {
+      icon.css({
+      'webkit-animation': '',
+      '-moz-animation': '',
+      '-o-animation': '',
+      'animation': ''
+      });
+    }, (tweetDelay / 2));
+  }
+
   var timeout = function() {
     setTimeout(function() {
       postTweet();
+      if (!paused) {
+        animateIcon();
+      }
       timeout();
     }, tweetDelay);
   };
