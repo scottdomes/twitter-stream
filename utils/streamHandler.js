@@ -6,8 +6,8 @@ module.exports = function(io, twit) {
 
   function defineStream(keyword, socket) {
     twit.stream('statuses/filter', { track: [keyword] }, function(stream) { 
-      twitterStream = stream;
-      twitterStream.on('data', function(data) {
+      twit.twitterStream = stream;
+      twit.twitterStream.on('data', function(data) {
 
         var tweet = {
           twid: data.id,
@@ -22,7 +22,7 @@ module.exports = function(io, twit) {
 
       });
 
-      twitterStream.on('error', function(error, code) {
+      twit.twitterStream.on('error', function(error, code) {
           console.log("My error: " + error + ": " + code);
       });
     });
@@ -30,14 +30,24 @@ module.exports = function(io, twit) {
 
   function connectSocket() {
     io.on('connection', function(socket) {
-
+      console.log('a user connected');
       socket.on('new-keyword', function(newKeyword) {
-          // twitterStream.destroy(); Deprecated to prevent too many requests
-          twitterStream = undefined;
+          // if (twit.twitterStream !== undefined) {
+          //   twit.twitterStream.destroy(); //Deprecated to prevent too many requests
+          //   console.log(twit.twitterStream.readable);
+          // }
+          // twitterStream = undefined;
           defineStream(newKeyword.keyword, socket);
         });
 
+      socket.on('disconnect', function() {
+        if (twit.twitterStream !== undefined) {
+          twit.twitterStream.destroy();
+        }
+      });
+
     });
+
   }
 
   connectSocket();
