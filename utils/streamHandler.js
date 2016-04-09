@@ -5,7 +5,6 @@ module.exports = function(io, twit) {
   var twitterStream; 
 
   function defineStream(keyword, socket) {
-    console.log('defining stream');
     twit.stream('statuses/filter', { track: [keyword] }, function(stream) { 
       twitterStream = stream;
       twitterStream.on('data', function(data) {
@@ -34,12 +33,8 @@ module.exports = function(io, twit) {
 
       socket.on('new-keyword', function(newKeyword) {
           // twitterStream.destroy(); Deprecated to prevent too many requests
-          if (twitterStream === undefined) {
-            defineStream(newKeyword.keyword, socket);
-          } else {
-            twitterStream = undefined;
-            defineStream(newKeyword.keyword, socket);
-          }
+          twitterStream = undefined;
+          defineStream(newKeyword.keyword, socket);
         });
 
     });
