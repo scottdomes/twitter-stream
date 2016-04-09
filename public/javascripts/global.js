@@ -4,7 +4,7 @@ $(function() {
   var socket = io.connect(url);
   var tweetsArray = [];
   var tweetDelay = 2000;
-  var paused = false;
+  var paused = true;
   var tweetSpeed = $('#tweet-speed');
 
   $('#faster').on('click', function() {
@@ -60,6 +60,7 @@ $(function() {
   });
 
   function newKeyword(key) {
+    paused = false;
     tweetsArray = [];
     $('#tweetFlash').text("Waiting for tweets.");
     $('#tweetFlash').hide();
